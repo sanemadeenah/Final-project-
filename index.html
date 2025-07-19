@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umar Marwan Badawi - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: #0077b6;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #9b59b6;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin-left: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links li a:hover, 
+        .nav-links li a.active {
+            background-color: #48cae4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #0077b6;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #0077b6;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #9b59b6;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #8e44ad;
+            transform: translateY(-2px);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skills {
+            margin-top: 2rem;
+        }
+        
+        .skills ul li {
+            position: relative;
+            padding-left: 2rem;
+            list-style: none;
+            background: #e3f2fd;
+            margin: 0.8rem 0;
+            padding: 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .skills ul li:hover {
+            transform: translateX(5px);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .skills ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 1rem;
+            color: #9b59b6;
+        }
+
+        .education-item {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #48cae4;
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+        }
+        
+        .education-item h3 {
+            color: #0077b6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #e3f2fd;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .project-image img,
+        .project-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            color: #0077b6;
+            text-decoration: none;
+        }
+        
+        .project-links a:hover {
+            color: #9b59b6;
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info p {
+            margin: 1rem 0;
+        }
+        
+        .contact-info i {
+            color: #9b59b6;
+            margin-right: 0.5rem;
+            width: 1.5rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .contact-form button {
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background-color: #8e44ad;
+        }
+
+        section {
+            margin: 2rem 0;
+        }
+
+        h2 {
+            color: #48cae4;
+            margin: 1.5rem 0 1rem;
+            border-bottom: 2px solid #48cae4;
+            padding-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #0077b6;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        /* Media Styles */
+        .media-container {
+            margin: 2rem 0;
+        }
+        
+        .media-item {
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .media-item img {
+            width: 100%;
+            display: block;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Umar<span>Bad</span></a>
+            <ul class="nav-links">
+                <li><a class="nav-link active" data-page="home">Home</a></li>
+                <li><a class="nav-link" data-page="about">About</a></li>
+                <li><a class="nav-link" data-page="education">Education</a></li>
+                <li><a class="nav-link" data-page="projects">Projects</a></li>
+                <li><a class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="home" class="page active">
+            <header class="hero">
+                <img src="assets/images/profile.jpg" alt="Umar Marwan Badawi" class="profile-pic">
+                <h1>Umar Marwan Badawi</h1>
+                <p class="tagline">Software Engineering Student | Northwest University Kano</p>
+                <a class="btn nav-link" data-page="projects">View My Projects</a>
+            </header>
+
+            <section>
+                <h2>Welcome</h2>
+                <p>Hello! I'm Umar, a passionate software engineering student with a focus on web development and problem-solving. This portfolio showcases my academic journey, projects, and skills.</p>
+                
+                <div class="media-container">
+                    <div class="media-item">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="assets/videos/intro.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="about" class="page">
+            <h1>About Me</h1>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm Umar Marwan Badawi, a dedicated software engineering student at Northwest University Kano with a passion for creating innovative web solutions.</p>
+                    
+                    <div class="media-item" style="margin: 1.5rem 0;">
+                        <img src="assets/images/working.jpg" alt="Working on project">
+                    </div>
+                    
+                    <p>My journey in technology began when I first discovered programming in high school, and since then I've been constantly learning and building projects to improve my skills.</p>
+                    
+                    <div class="skills">
+                        <h2>Technical Skills</h2>
+                        <ul>
+                            <li>Python, Java</li>
+                            <li>HTML, CSS, JavaScript</li>
+                            <li>React, Node.js</li>
+                            <li>Database Management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="education" class="page">
+            <h1>My Education</h1>
+            
+            <div class="education-item">
+                <h3>Northwest University Kano</h3>
+                <p class="date">2022 - Present</p>
+                <p>Bachelor of Science in Software Engineering</p>
+                <p>Key Courses: Data Structures, Algorithms, Web Development, Database Systems</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>Governor's College Kano</h3>
+                <p class="date">2015 - 2021</p>
+                <p>Senior Secondary School Certificate</p>
+                <p>Science Major with focus on Mathematics and Physics</p>
+            </div>
+        </div>
+
+        <div id="projects" class="page">
+            <h1>My Projects</h1>
+            
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <video controls>
+                            <source src="assets/videos/ecommerce-demo.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Website</h3>
+                        <p>A full-featured online store built with React and Node.js</p>
+                        <div class="project-links">
+                            <a href="#">Live Demo</a>
+                            <a href="#">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/images/student-system.jpg" alt="Student Management System">
+                    </div>
+                    <div class="project-content">
+                        <h3>Student Management System</h3>
+                        <p>Python application for managing student records</p>
+                        <div class="project-links">
+                            <a href="#">Live Demo</a>
+                            <a href="#">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="page">
+            <h1>Get In Touch</h1>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> umarmarwanbadawi@gmail.com</p>
+                <p><i class="fas fa-phone"></i> 09160170034</p>
+                <p><i class="fas fa-map-marker-alt"></i> Kano, Nigeria</p>
+            </div>
+            
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Umar Marwan Badawi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            function switchPage(pageId) {
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                document.getElementById(pageId).classList.add('active');
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.page === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.dataset.page;
+                    switchPage(pageId);
+                    history.pushState(null, null, `#${pageId}`);
+                });
+            });
+            
+            if (window.location.hash) {
+                const pageId = window.location.hash.substring(1);
+                switchPage(pageId);
+            }
+            
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Message sent! (This is a demo)');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
